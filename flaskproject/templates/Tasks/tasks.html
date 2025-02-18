@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/a0aab5c309.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="stylesheet" href="/static/Tasks/tasks.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="mbod1">
+        <nav id="navbar">
+            <div id="logo">
+                <h3>TASKIIFY</h3>
+            </div>
+            <div id="nav">
+                <a href="{{url_for('home')}}">HOME</a>
+                <a href="{{url_for('about')}}">ABOUT</a>
+                <a href="{{url_for('tasks')}}" style="color: #ff4c68;">TASKS</a>
+                <a href="{{url_for('imptasks')}}">IMPORTANT TASKS</a>
+                <a href="{{url_for('settings')}}">SETTINGS</a>
+            </div>
+            <div id="profile">
+                <i class="fa-solid fa-user" aria-hidden="true"></i>
+                <p>{{ username }}</p>
+            </div>
+        </nav>
+        <div id="mbody">
+            <div id="tasks-navbar">
+                <div id="task-bar">
+                    <div id="tasks-bar1">
+                        <h1>Tasks</h1>
+                    </div>
+                </div>
+                <div id="add-tasks">
+                    <div class="tasks-bar2">
+                        <a href="{{url_for('home')}}" id="add-tasks-btnn">
+                            <h3>Add Tasks</h3><i class="fa-solid fa-plus" style="color: #ff4c68;"></i></a>
+                        
+                    </div>
+                    <div class="tasks-bar2">
+                        <button id="week-tasks-btnn">
+                            <h3>All Tasks</h3><i class="fa-solid fa-chevron-down" style="color: #ff4c68;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="tasks-area">
+                <div class="line1">
+                    {% for task in normal_tasks%}
+                    <div class="area1 {% if task.task_complete %} completed-task {% endif %}">
+
+                        <div class="area1-head">
+                            <div class="area-head">
+                                <h1>{{task.task_title}}</h1>
+                            </div>
+                            <a href="/prioritize_task/{{task.id}}" class="area-prior {% if task.task_prior %} prior-task {% endif %}"><i class="fa-solid fa-bookmark"></i></a>
+                        </div>
+                        <div class="area1-desc">{{task.task_description}}</div>
+                        <div class="area1-tools">
+                            <div class="area-time">{{task.task_date}}</div>
+                            <div class="arear-tools">
+                                <a href="/important_task/{{task.id}}" class="star"><i
+                                    class="fa-solid fa-star"></i></a>
+                            <a href="/complete_task/{{task.id}}" class="done"><i
+                                    class="fa-solid fa-square-check"></i></a>
+                            <a href="/delete_task/{{task.id}}" class="trash"><i
+                                    class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="add-task">
+        <div id="taskcont">
+            <div id="main">
+                <div id="title"><input type="text" name="title1" id="title1" placeholder="Title"><input type="date"
+                        name="date1" id="date1" placeholder="Date">
+                </div>
+                <div id="descriptionn1"><textarea type="text" name="description" id="description1"
+                        placeholder="Description(Optional)"></textarea></div>
+                <div id="save-task-btnn"> <button id="save-task">Save Task</button></div>
+            </div>
+        </div>
+    </div>
+    <!-- <script>
+        // Select DOM elements
+        const addTaskButton = document.querySelector("#add-tasks-btnn");
+        const taskModal = document.querySelector("#add-task");
+        const taskContainer = document.querySelector("#tasks-area");
+        const taskInput = document.querySelector("#title1");
+        const dateInput = document.querySelector("#date1");
+        const descriptionInput = document.querySelector("#description1");
+        const saveTaskButton = document.querySelector("#save-task");
+        const line1Container = document.querySelector(".line1"); // Select the line1 container
+        let taskBeingEdited = null; // Keep track of the task being edited
+
+        // Load tasks from localStorage on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTasks = localStorage.getItem("tasks");
+            if (savedTasks) {
+                line1Container.innerHTML = savedTasks;
+                // Re-attach event listeners to loaded tasks
+                //line1Container.querySelectorAll(".area1").forEach(taskDiv => {
+                //attachTaskEventListeners(taskDiv);
+            }
+        });
+
+
+        // Open task modal
+        addTaskButton.addEventListener("click", () => {
+            taskModal.style.zIndex = "2"; // Bring modal to the front
+            taskBeingEdited = null; // Reset the editing state for creating a new task
+        });
+
+        // Close modal function
+        const closeModal = () => {
+            taskModal.style.zIndex = "-999"; // Send modal to the back
+            taskInput.value = "";
+            dateInput.value = "";
+            descriptionInput.value = "";
+            taskBeingEdited = null; // Reset the editing state
+        };
+
+        // Save task
+        saveTaskButton.addEventListener("click", () => {
+            const taskTitle = taskInput.value.trim();
+            const taskDate = dateInput.value.trim();
+            const taskDescription = descriptionInput.value.trim();
+
+            if (!taskTitle || !taskDate) {
+                alert("Please fill in all required fields!");
+                return;
+            }
+
+            if (taskBeingEdited) {
+                // Update the existing task
+                updateTask(taskBeingEdited, taskTitle, taskDate, taskDescription);
+            } else {
+                // Create a new task
+                addTask(taskTitle, taskDate, taskDescription);
+            }
+
+            closeModal();
+            saveTasksToLocalStorage(); // Save to localStorage after saving the task
+        });
+
+        // Add a task to the container
+        function addTask(title, date, description) {
+            const taskDiv = createTaskElement(title, date, description);
+            line1Container.insertBefore(taskDiv, line1Container.firstChild);
+            saveTasksToLocalStorage(); // Save to localStorage after adding the task
+        }
+
+        // Update a task's content
+        function updateTask(taskDiv, title, date, description) {
+            taskDiv.querySelector(".area-head h1").textContent = title;
+            taskDiv.querySelector(".area1-desc").textContent = description || "No Description Provided";
+            taskDiv.querySelector(".area-time").textContent = date;
+            saveTasksToLocalStorage(); // Save to localStorage after updating the task
+        }
+
+        // Create a task element
+        function createTaskElement(title, date, description) {
+            const taskDiv = document.createElement("div");
+            taskDiv.classList.add("area1");
+
+            taskDiv.innerHTML = `
+        <div class="area1-head">
+            <div class="area-head">
+                <h1>${title}</h1>
+            </div>
+            <div class="area-prior"><i class="fa-solid fa-bookmark"></i></div>
+        </div>
+        <div class="area1-desc">${description || "No Description Provided"}</div>
+        <div class="area1-tools">
+            <div class="area-time">${date}</div>
+            <div class="arear-tools">
+                <div class="done"><i class="fa-solid fa-square-check"></i></div>
+                <div class="pencil"><i class="fa-solid fa-pencil"></i></div>
+                <div class="trash"><i class="fa-solid fa-trash"></i></div>
+            </div>
+        </div>
+    `;
+
+            attachTaskEventListeners(taskDiv);
+
+            return taskDiv;
+        }
+
+        // Attach event listeners to task tools
+        function attachTaskEventListeners(taskDiv) {
+            const editButton = taskDiv.querySelector(".pencil");
+            const deleteButton = taskDiv.querySelector(".trash");
+            const doneButton = taskDiv.querySelector(".done");
+            const priorButton = taskDiv.querySelector(".area-prior");
+
+            editButton.addEventListener("click", () => editTask(taskDiv));
+            deleteButton.addEventListener("click", () => deleteTask(taskDiv));
+            doneButton.addEventListener("click", () => toggleTaskCompletion(taskDiv));
+            priorButton.addEventListener("click", () => togglePriority(taskDiv, priorButton));
+        }
+
+        // Edit a task
+        function editTask(taskDiv) {
+            const title = taskDiv.querySelector(".area-head h1").textContent;
+            const description = taskDiv.querySelector(".area1-desc").textContent;
+            const date = taskDiv.querySelector(".area-time").textContent;
+
+            taskInput.value = title;
+            descriptionInput.value = description !== "No Description Provided" ? description : "";
+            dateInput.value = date;
+
+            taskModal.style.zIndex = "2";
+            taskBeingEdited = taskDiv; // Set the task being edited
+        }
+
+        // Delete a task
+        function deleteTask(taskDiv) {
+            if (confirm("Are you sure you want to delete this task?")) {
+                taskDiv.remove();
+                saveTasksToLocalStorage(); // Save to localStorage after deleting the task
+            }
+        }
+
+        // Toggle task completion
+        function toggleTaskCompletion(taskDiv) {
+            const doneButton = taskDiv.querySelector(".done i");
+            const isDone = taskDiv.classList.toggle("task-done");
+
+            if (isDone) {
+                taskDiv.style.backgroundColor = "rgba(55, 255, 0, 0.2)"; // Green background
+                doneButton.className = "fa-solid fa-rotate-left"; // Change to undo icon
+            } else {
+                taskDiv.style.backgroundColor = ""; // Reset background color
+                doneButton.className = "fa-solid fa-square-check"; // Restore check icon
+            }
+            saveTasksToLocalStorage(); // Save to localStorage after toggling completion
+        }
+
+        // Toggle priority
+        function togglePriority(taskDiv, priorButton) {
+            const line1Container = document.querySelector(".line1"); // Container for tasks
+            const currentColor = getComputedStyle(priorButton).color;
+
+            if (currentColor === "rgb(255, 255, 255)") {
+                priorButton.style.color = "#ff4c68"; // Mark as important
+            } else {
+                priorButton.style.color = "white"; // Remove important marking
+            }
+
+            // Reorder tasks
+            const allTaskDivs = Array.from(line1Container.querySelectorAll(".area1"));
+
+            allTaskDivs.sort((a, b) => {
+                const aImportant = getComputedStyle(a.querySelector(".area-prior")).color === "rgb(255, 76, 104)";
+                const bImportant = getComputedStyle(b.querySelector(".area-prior")).color === "rgb(255, 76, 104)";
+                return bImportant - aImportant;
+            });
+
+            allTaskDivs.forEach(task => line1Container.appendChild(task));
+            saveTasksToLocalStorage(); // Save to localStorage after toggling priority
+        }
+
+        // Save tasks to localStorage
+        function saveTasksToLocalStorage() {
+            const tasksHTML = line1Container.innerHTML;
+            localStorage.setItem("tasks", tasksHTML);
+        }
+
+        // Select DOM elements for filtering
+        const weekTasksButton = document.querySelector("#week-tasks-btnn");
+
+        // Filter tasks by selected timeframe
+        weekTasksButton.addEventListener("click", () => {
+            const dropdown = document.querySelector("#week-tasks-btnn h3");
+            const filters = ["All Tasks", "Today", "This Week", "This Month"];
+            const currentFilterIndex = filters.indexOf(dropdown.textContent);
+            const nextFilterIndex = (currentFilterIndex + 1) % filters.length; // Loop through filters
+            const filter = filters[nextFilterIndex];
+
+            dropdown.textContent = filter;
+            filterTasks(filter);
+        });
+
+        // Filter tasks based on timeframe
+        function filterTasks(timeframe) {
+            const allTasks = document.querySelectorAll(".area1");
+            const today = new Date();
+
+            allTasks.forEach(task => {
+                const taskDate = new Date(task.querySelector(".area-time").textContent);
+                let showTask = false;
+
+                if (timeframe === "All Tasks") {
+                    showTask = true; // Always show all tasks
+                } else if (timeframe === "Today") {
+                    showTask = taskDate.toDateString() === today.toDateString();
+                } else if (timeframe === "This Week") {
+                    const startOfWeek = new Date(today);
+                    startOfWeek.setDate(today.getDate() - today.getDay());
+                    const endOfWeek = new Date(today);
+                    endOfWeek.setDate(today.getDate() + (6 - today.getDay()));
+                    showTask = taskDate >= startOfWeek && taskDate <= endOfWeek;
+                } else if (timeframe === "This Month") {
+                    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+                    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+                    showTask = taskDate >= startOfMonth && taskDate <= endOfMonth;
+                }
+
+                task.style.display = showTask ? "" : "none"; // Show/hide task
+            });
+        }
+
+        // Load tasks from localStorage on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTasks = localStorage.getItem("tasks");
+            if (savedTasks) {
+                line1Container.innerHTML = savedTasks;
+
+                // Re-attach event listeners to all task elements after loading
+                line1Container.querySelectorAll(".area1").forEach(taskDiv => {
+                    attachTaskEventListeners(taskDiv); // Reattach listeners to each task
+                });
+            }
+        });
+
+    </script>
+    <script>
+        const username = document.querySelector("#profile p")
+        let profile = JSON.parse(localStorage.getItem("profile"))
+        console.log(profile)
+        username.innerHTML = profile.name
+    </script> -->
+</body>
+
+</html>

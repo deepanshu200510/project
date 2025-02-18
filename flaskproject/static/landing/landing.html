@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Inside</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a0aab5c309.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: gilroy sans-serif;
+            overflow: hidden;
+        }
+
+        #container {
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
+
+        /* <!-- ---NAVBAR SECTION---- --> */
+
+        #navbar {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 80px;
+
+        }
+
+        #logo h3 {
+            font-size: 35px;
+            font-family: 'Bungee', sans-serif;
+            color: white;
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        #nav {
+            display: flex;
+            gap: 15px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: rgb(25, 25, 25);
+
+        }
+
+        #profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: large;
+            font-family: 'MyCustomFont', sans-serif;
+        }
+
+        #profile a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: large;
+            font-family: 'MyCustomFont', sans-serif;
+        }
+
+        #main {
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            position: relative;
+        }
+
+        #main #DGA {
+            position: absolute;
+            color: white;
+            font-size: 15px;
+            left: 80px;
+            top: 25%;
+            font-weight: 800;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        #main #mainheading {
+            width: 60%;
+            position: absolute;
+            font-family: sans-serif;
+            font-weight: 700;
+            left: 80px;
+            top: 32%;
+            font-size: 100px;
+            line-height: 85px;
+            z-index: 1;
+        }
+
+        #sh {
+            letter-spacing: -.5px;
+            color: white;
+        }
+
+        #mh {
+            color: white;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #mh2 {
+            color: #ff4c68;
+            font-size: 80px;
+        }
+
+        #para1 {
+            color: rgb(112, 112, 112);
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: 400;
+            position: absolute;
+            left: 80px;
+            top: 60%;
+            font-size: 17px;
+        }
+
+        #play {
+            position: absolute;
+            left: 80px;
+            bottom: 21%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-family: sans-serif;
+            color: #ffffff;
+        }
+
+        #play a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-family: sans-serif;
+            color: #ff4c68;
+        }
+
+        #play:hover {
+            letter-spacing: 2.5px;
+            transition: .5s ease-in-out;
+            color: #ff4c68;
+            cursor: pointer;
+        }
+
+        #play i {
+            font-size: 30px;
+            color: #ff4c68;
+        }
+
+        #play i:hover {
+            color: #ff4c68;
+            transition: .1s ease-in-out;
+        }
+
+        #main img {
+            position: absolute;
+            top: 6%;
+            right: 80px;
+            width: 396px;
+            height: 550px;
+        }
+
+        @font-face {
+            font-family: 'MyCustomFont';
+            src: url(/font1/Franklin\ Gothic\ Medium\ Cond\ Regular.ttf) format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+    </style>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+
+    <div id="container">
+
+        <!-- ---NAVBAR SECTION---- -->
+        <nav id="navbar">
+            <div id="logo">
+                <h3>TASKIIFY</h3>
+            </div>
+
+            <div id="profile">
+                <a href="/login/aalogin.html"><i class="fa-solid fa-user" aria-hidden="true"></i>
+                    <p>Create Account</p>
+                </a>
+            </div>
+        </nav>
+
+        <!-- -----NAVBAR SECTION ENDS---- -->
+
+
+        <!-- --MAIN SECTION---- -->
+        <div id="main">
+            <h3 id="DGA">TASK MANAGER</h3>
+            <h1 id="mainheading"><span id="mh">MANAGE YOUR </span><br><span id="sh">TASKS BETTER</span><span
+                    id="mh2">.</span></h1>
+            <div id="para1">
+                TASKIIFY IS A WORLDWIDE BASED TASK MANAGING WEBSITE.<br>IT SPECIALIZE IN SORTING AND SUGGESTING TASKS.
+
+
+            </div>
+
+            <div id="play"><a href="/login/aalogin.html"><i class="ri-play-circle-line"></i> Get Started</a></div>
+
+            <img src="/landing/magnus-andersson-KAzgxInZXMo-unsplash.jpg" alt="">
+
+        </div>
+        <!-- --MAIN SECTION ENDS---- -->
+</body>
+
+</html>

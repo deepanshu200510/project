@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/a0aab5c309.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(0, 0, 0);
+        }
+
+        /* navbar starts */
+        #navbar {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        #logo {
+            justify-content: left;
+        }
+
+        #logo h3 {
+            font-size: 35px;
+            font-family: "Bungee", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        #nav {
+            border: 1px solid black;
+            padding: 13px 30px;
+            border-radius: 200px;
+            background-color: rgb(25, 25, 25);
+            box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.3) inset;
+        }
+
+        @font-face {
+            font-family: 'MyCustomFont';
+            src: url(/static/font1/Franklin\ Gothic\ Medium\ Cond\ Regular.ttf) format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #nav a {
+            padding: 0 10px;
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            font-family: 'MyCustomFont', sans-serif;
+            font-size: 18px;
+        }
+
+        #nav a:hover {
+            color: #ff4c68;
+            text-decoration: underline;
+            font-size: 19px;
+        }
+
+        #profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: white;
+            font-family: 'MyCustomFont', sans-serif;
+            font-size: 20px;
+        }
+
+        /* navbar ends */
+
+        /* Main body layout */
+        #mbody {
+            width: 100%;
+            height: calc(100% - 80px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+
+        #mcontainer {
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            height: 90%;
+            padding: 30px;
+            background-color: rgb(20, 20, 20);
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        #about {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 65%;
+            padding-right: 50px;
+            font-family: 'MyCustomFont', sans-serif;
+        }
+
+        .abt {
+            font-size: 56px;
+            color: #f5f5f5;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ff4c68;
+            padding-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .abt-p {
+            font-size: 18px;
+            color: #cccccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .abt-p strong {
+            color: #ff4c68;
+        }
+
+        #image {
+            width: 35%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        #image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div id="logo">
+            <h3>TASKIIFY</h3>
+        </div>
+        <div id="nav">
+            <a href="{{url_for('home')}}">HOME</a>
+            <a href="{{url_for('about')}}" style="color: #ff4c68;">ABOUT</a>
+            <a href="{{url_for('tasks')}}">TASKS</a>
+            <a href="{{url_for('imptasks')}}">IMPORTANT TASKS</a>
+            <a href="{{url_for('settings')}}">SETTINGS</a>
+        </div>
+        <div id="profile">
+            <i class="fa-solid fa-user" aria-hidden="true"></i>
+            <p>{{ username }}</p>
+        </div>
+    </nav>
+    <div id="mbody">
+        <div id="mcontainer">
+            <div id="about">
+                <h1 class="abt">ABOUT <span style="color: #ff4c68;">US</span></h1>
+                <p class="abt-p">
+                    Welcome to <strong>TASKIIFY</strong>! We are your dedicated platform for streamlining task
+                    management
+                    and maximizing productivity. Designed with both individuals and teams in mind, TASKIIFY offers an
+                    intuitive interface and powerful tools to help you stay on top of your goals.
+                </p>
+                <p class="abt-p">
+                    <strong>Key Features:</strong><br>
+                <ul class="abt-p">
+                    <li><strong>Simple Task Management:</strong> Create, edit, and organize tasks effortlessly.</li>
+                    <li><strong>Priority Sorting:</strong> Focus on critical tasks with customizable priority settings.
+                    </li>
+                    <li><strong>Seamless Calendar Integration:</strong> Sync tasks with your calendar to never miss a
+                        deadline.</li>
+                    <li><strong>Team Collaboration:</strong> Work together with shared tasks, updates, and reminders.
+                    </li>
+                    <li><strong>Real-Time Notifications:</strong> Receive timely updates and stay ahead of deadlines.
+                    </li>
+                </ul>
+                </p>
+                <p class="abt-p">
+                    Whether you’re managing personal tasks or collaborating on projects, <strong>TASKIIFY</strong> is
+                    here to
+                    help you stay organized and productive every day.
+                </p>
+            </div>
+            <div id="image">
+                <img src="/static/landing/rakitha-perera-3TxAgUhUUKk-unsplash.jpg" alt="Task Management Image">
+            </div>
+        </div>
+    </div>
+    <script>
+        const username = document.querySelector("#profile p")
+        let profile = JSON.parse(localStorage.getItem("profile"))
+        console.log(profile)
+        username.innerHTML = profile.name
+    </script>
+</body>
+
+</html>

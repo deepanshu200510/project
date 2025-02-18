@@ -1,0 +1,980 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    font-family: 'MyCustomFont', sans-serif;
+}
+
+#mbod1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+}
+
+/* navbar starts */
+#navbar {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+#logo {
+    justify-content: left;
+}
+
+#logo h3 {
+    font-size: 35px;
+    font-family: "Bungee", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+#nav {
+    border: 1px solid black;
+    padding: 13px 30px;
+    border-radius: 200px;
+    background-color: rgb(25, 25, 25);
+    box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.3) inset;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url(/static/font1/Franklin\ Gothic\ Medium\ Cond\ Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#nav a {
+    padding: 0 10px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: 18px;
+}
+
+#nav a:hover {
+    color: #ff4c68;
+    text-decoration: underline;
+    font-size: 19px;
+}
+
+#profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: 20px;
+}
+
+/* navbar ends */
+
+/* Main body layout */
+#mbody {
+    width: 100%;
+    height: calc(100% - 80px);
+    display: flex;
+    background-color: #000000;
+    flex-direction: row;
+}
+
+#left-side {
+    height: 100%;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+#tasktop {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+}
+
+#managetasks {
+    width: 45%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 85px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+}
+
+#my {
+    color: white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-fill-color: transparent;
+}
+
+#ta-sks {
+    letter-spacing: -.5px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#addtasks-btn {
+    width: 60px;
+    height: 60px;
+    background-color: #4D5A60;
+    color: #ececec;
+    border: none;
+    padding: 0px;
+    border-radius: 100px;
+    font-size: 60px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#taskinfor {
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+#taskinfor form{
+    display: flex;
+}
+.addtaskh1{
+    color: #ff4c68;
+
+}
+#taskinfor-left {
+    width: 50%;
+    height: 100%;
+    padding: 30px 30px 0px 0px;
+}
+
+#taskinfor-left1 {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgb(30, 30, 30);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#taskinfor-left1 img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#taskinfor-right {
+    height: 100%;
+    width: 50%;
+    padding: 30px 30px 0px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#taskinfor-right1 {
+    height: 50%;
+    width: 100%;
+    background-color: rgb(30, 30, 30);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+#title-tasks{
+    width: 100%;
+    height: 100%;
+    background-color: #353e42;
+    border: none;
+    border-radius: 10px;
+    color: #000000;
+    font-size: 20px;
+    padding: 0px 8px;
+    font-weight: bold;
+}
+#date-tasks{
+    width: 100%;
+    height: 100%;
+    background-color: #353e42;
+    border: none;
+    border-radius: 10px;
+    color: #000000;
+    font-size: 20px;
+    padding: 0px 8px;
+    font-weight: bold;
+}
+#description-tasks{
+    width: 100%;
+    height: 60%;
+    background-color: #353e42;
+    border: none;
+    border-radius: 10px;
+    color: #000000;
+    font-size: 20px;
+    padding: 0px 8px;
+    font-weight: bold;
+}
+#addtasksbtn{
+    background-color: #353e42;
+    color: #ececec;
+    border: solid #ff4c68;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#taskinfor-right2 {
+    height: 50%;
+    width: 100%;
+    background-color: rgb(30, 30, 30);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#taskbottom {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    justify-content: space-between;
+}
+
+#todaytask {
+    width: 45%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(30, 30, 30);
+    border-radius: 10px;
+    gap: 15px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+#td-head {
+    width: 100%;
+    /* height: 20%; */
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
+
+.td-head1 {
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.td-head2 {
+    width: auto;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    border: 2px solid #ff4c68;
+    padding: 0px 15px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.this-week {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 15px;
+    gap: 5px;
+    color: white;
+}
+
+.this-week a {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 15px;
+    gap: 5px;
+    color: white;
+    text-decoration: none;
+}
+.td-tasks{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.td-task1 {
+    width: 451.4px;
+    height: 89px;
+    border-radius: 10px;
+    background-color: #353e42;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    gap: 5px;
+    overflow-x: hidden;
+    flex-shrink: 0;
+}
+
+.td-task-head {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.td-task-title {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.td-task-title h3{
+    text-transform: capitalize;
+}
+
+
+.td-task-tools {
+    height: 100%;
+    color: rgb(143, 143, 143);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+.pencil{
+    text-decoration: none;
+    color: #4a7a80;
+}
+.trash{
+    text-decoration: none;
+    color: #4a7a80;
+}
+.done{
+    text-decoration: none;
+    color: #4a7a80;
+}
+.star{
+    text-decoration: none;
+    color: #4a7a80;
+}
+.pencil:hover {
+    font-size: 19px;
+    color: aqua;
+}
+
+.trash:hover {
+    font-size: 19px;
+    color: #ff4c68;
+}
+
+.done:hover {
+    font-size: 19px;
+    color: rgb(55, 255, 0);
+}
+
+.star:hover {
+    font-size: 19px;
+    color: rgb(255, 215, 0);
+}
+.star1{
+    color: rgb(255, 215, 0);
+}
+.star1:hover{
+    font-size: 19px;
+    color: rgb(255, 215, 0);
+}
+.td-task-desc {
+    width: 100%;
+    height: 50%;
+    color: rgb(200, 200, 200);
+    display: flex;
+    overflow: hidden;
+    padding-left: 15px;
+    border-left: 3px solid #ff4c68;
+}
+
+#shedule {
+    width: 573.6px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(30, 30, 30);
+    border-radius: 10px;
+}
+
+/* Styles for the Important Tasks section */
+
+#imp-tasks {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 20px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.imp-tasks-line1 {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.imp-tasks1 {
+    width: 259.3px;
+    height: 131.2px;
+    background-color: #353e42;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: 18px;
+    padding: 15px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    gap: 10px;
+}
+
+.imp-task-head {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.imp-task-title {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: white;
+    letter-spacing: 1px;
+}
+.imp-task-title h3 {
+    text-transform: capitalize;
+}
+
+.imp-task-tools {
+    height: 100%;
+    color: rgb(143, 143, 143);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.imp-task-desc {
+    width: 100%;
+    height: 70%;
+    color: rgb(200, 200, 200);
+    display: flex;
+    overflow: hidden;
+    padding-left: 15px;
+    border-left: 3px solid #ff4c68;
+}
+
+#right-side {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+#progress {
+    width: 100%;
+    height: 40%;
+    padding: 30px 30px 0px 0px;
+}
+
+#progress1 {
+    background-image: url("/static/Home/Frame1.png");
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+#progress-hd {
+    width: 100%;
+    height: 30%;
+    color: white;
+    font-size: 20px;
+}
+
+#progress-no {
+    width: 100%;
+    height: 30%;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+#progress-no1 {
+    font-size: 25px;
+}
+
+#progress-no2 {
+    font-size: 20px;
+}
+
+#reminder {
+    width: 100%;
+    height: 60%;
+    padding: 30px 30px 30px 0px;
+}
+
+#reminder1 {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(30, 30, 30);
+    border-radius: 10px;
+    gap: 15px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+#add-reminder-btn{
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+#reminder-task-area{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.reminder-task1{
+    width: 314px;
+    height: 81.85px;
+    background-color: #353e42;
+    border-radius: 10px;
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    flex-direction: row;
+    color: white;
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: 18px;
+    padding: 15px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    gap: 10px;
+    flex-shrink: none;
+}
+.reminder-title-area{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.reminder-title{
+    font-size: 22px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+}
+.reminder-date{
+    font-size: 20px;
+    color: rgb(143, 143, 143);
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    border-left: 3px solid #ff4c68;
+}
+.remineder-priortise{
+    font-size: 18px;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+    color: rgb(143, 143, 143);
+}
+/* task aading area */
+#add-task {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+}
+#edit-task {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+}
+#taskcont {
+    width: 80%;
+    height: 70%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: rgb(30, 30, 30);
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+#title {
+    overflow: hidden;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    gap: 10px;
+
+}
+
+#title1 input:focus {
+    outline: none;
+    background-color: #4a7a80;
+}
+
+#title1 {
+    position: relative;
+    width: 70%;
+    height: 100%;
+    font-size: 48px;
+    font-family: 'MyCustomFont', sans-serif;
+    padding: 10px 30px;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 30px;
+    text-transform: capitalize;
+    background-color: #4a7a80;
+}
+
+#title1::placeholder {
+    font-size: 48px;
+    font-family: 'MyCustomFont', sans-serif;
+    color: white;
+}
+
+#date1 {
+    position: relative;
+    width: 30%;
+    height: 100%;
+    font-size: 48px;
+    font-family: 'MyCustomFont', sans-serif;
+    padding: 10px 30px;
+    border: none;
+    color: white;
+    outline: none;
+    border-radius: 30px;
+    background-color: #4a7a80;
+}
+
+#date1::placeholder {
+    font-size: 48px;
+    font-family: 'MyCustomFont', sans-serif;
+    color: white;
+}
+
+#descriptionn1 {
+    display: flex;
+    align-self: start;
+    min-width: 100%;
+    min-height: 70%;
+    max-width: 100%;
+    max-height: 70%;
+    height: 70%;
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+#description1 {
+    display: flex;
+    align-self: start;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    font-size: 28px;
+    font-family: 'MyCustomFont', sans-serif;
+    padding: 30px;
+    outline: none;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    background-color: #4a7a80;
+}
+
+#description1::placeholder {
+    font-size: 28px;
+    font-family: 'MyCustomFont', sans-serif;
+    color: white;
+}
+
+#save-task-btnn {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#save-task {
+    height: 100%;
+    width: 40%;
+    padding: 0px 50px;
+    background-color: #4a7a80;
+    font-size: 22px;
+    font-family: 'MyCustomFont', sans-serif;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+#markimp-task {
+    height: 100%;
+    width: 40%;
+    padding: 0px 50px;
+    background-color: #4a7a80;
+    font-size: 22px;
+    font-family: 'MyCustomFont', sans-serif;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+}
+/* remineder add area */
+#add-remineder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+}
+
+#taskcont-rem {
+    width: 60%;
+    height: 50%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    background-color: rgb(30, 30, 30);
+}
+
+#main-rem {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#title-rem {
+    overflow: hidden;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 30px;
+
+}
+
+#title1-rem input:focus {
+    outline: none;
+    background-color: #4a7a80;
+}
+
+#title1-rem {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-size: 48px;
+    font-family: 'MyCustomFont', sans-serif;
+    padding: 10px 30px;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 30px;
+    text-transform: capitalize;
+    background-color: #4a7a80;
+}
+
+#title1-rem::placeholder {
+    font-size: 48px;
+    font-family: 'MyCustomFont', sans-serif;
+    color: white;
+}
+
+#date1-rem {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-size: 48px;
+    font-family: 'MyCustomFont', sans-serif;
+    padding: 10px 30px;
+    border: none;
+    color: white;
+    outline: none;
+    border-radius: 30px;
+    background-color: #4a7a80;
+}
+
+#date1-rem::placeholder {
+    font-size: 48px;
+    font-family: 'MyCustomFont', sans-serif;
+    color: white;
+}
+
+#save-task-btnn-rem {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#save-task-rem {
+    height: 100%;
+    width: 40%;
+    padding: 0px 50px;
+    background-color: #4a7a80;
+    font-size: 22px;
+    font-family: 'MyCustomFont', sans-serif;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+/* remineder add area */
+.task {
+    color: white;
+    padding: 20px;
+}
+
+.task-title {
+    font-size: 32px;
+    font-family: 'MyCustomFont', sans-serif;
+}
+
+.task-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.task-description {
+    color: rgb(170, 170, 170);
+    font-size: 20px;
+    font-family: 'MyCustomFont', sans-serif;
+    font-weight: normal;
+}
+.completed-task {
+    background-color: rgba(155, 218, 178, 0.3);
+}

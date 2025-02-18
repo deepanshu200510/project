@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <script src="https://kit.fontawesome.com/a0aab5c309.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/Home/home.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="mbod1">
+
+        <!-- nav bar starts -->
+
+        <nav id="navbar">
+            <div id="logo">
+                <h3>TASKIIFY</h3>
+            </div>
+            <div id="nav">
+                <a href="{{url_for('home')}}" style="color: #ff4c68;">HOME</a>
+                <a href="{{url_for('about')}}">ABOUT</a>
+                <a href="{{url_for('tasks')}}">TASKS</a>
+                <a href="{{url_for('imptasks')}}">IMPORTANT TASKS</a>
+                <a href="{{url_for('settings')}}">SETTINGS</a>
+            </div>
+            <div id="profile">
+                <i class="fa-solid fa-user" aria-hidden="true"></i>
+                <p>{{ username }}</p>
+            </div>
+        </nav>
+
+        <!-- nav bar ends -->
+
+        <div id="mbody">
+            <div id="left-side">
+                <div id="tasktop">
+
+                    <!--add task button starts-->
+                    <div id="managetasks">
+                        <h1><span id="my">ADD YOUR</span><br><span id="ta-sks">TASKS</span></h1>
+                    </div>
+                    <!--add task button ends-->
+                    <div id="taskinfor">
+                        {%if update_task %}
+                        <form action="/update_task/{{update_task.id}}" method="POST">
+
+                            <div id="taskinfor-right">
+                                <div id="taskinfor-right1">
+                                    <h1 class="addtaskh1">Tasks Title</h1>
+                                    <input type="text" name="task_title" id="title-tasks" placeholder="Title" value="{{update_task.task_title}}">
+                                </div>
+                                <div id="taskinfor-right2">
+                                    <h1 class="addtaskh1">Tasks Date</h1>
+                                    <input type="date" name="task_date" id="date-tasks" placeholder="Date" value="{{ update_task.task_date }}">
+                                </div>
+                            </div>
+                            <div id="taskinfor-left">
+                                <div id="taskinfor-left1">
+                                    <h1 class="addtaskh1">Tasks Description</h1>
+                                    <textarea type="text" name="task_description" id="description-tasks"
+                                        placeholder="Description(Optional)" >{% if update_task.task_description %}{{ update_task.task_description }}{% endif %}</textarea>
+                                    <button type="submit" id="addtasksbtn">
+                                        <h1 class="addtaskh1">Add Task</h1>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        {% else %}
+                        <form action="/add_task" method="POST">
+
+                            <div id="taskinfor-right">
+                                <div id="taskinfor-right1">
+                                    <h1 class="addtaskh1">Tasks Title</h1>
+                                    <input type="text" name="task_title" id="title-tasks" placeholder="Title">
+                                </div>
+                                <div id="taskinfor-right2">
+                                    <h1 class="addtaskh1">Tasks Date</h1>
+                                    <input type="date" name="task_date" id="date-tasks" placeholder="Date">
+                                </div>
+                            </div>
+                            <div id="taskinfor-left">
+                                <div id="taskinfor-left1">
+                                    <h1 class="addtaskh1">Tasks Description</h1>
+                                    <textarea type="text" name="task_description" id="description-tasks"
+                                        placeholder="Description(Optional)"></textarea>
+                                    <button type="submit" id="addtasksbtn">
+                                        <h1 class="addtaskh1">Add Task</h1>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                <div id="taskbottom">
+
+                    <!--todays task area-->
+                    <div id="todaytask">
+                        <div id="td-head">
+                            <div class="td-head1">
+                                <h1>Today's Tasks</h1>
+                            </div>
+                            <div class="td-head2">
+                                <div class="this-week">
+                                    <a href="{{url_for('tasks')}}">
+                                        <h3>View All</h3><i class="fa-solid fa-chevron-right"
+                                            style="color: #ff4c68;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="td-tasks">
+                            {% for task in normal_tasks %}
+                            <div class="td-task1 {% if task.task_complete %} completed-task {% endif %}">
+
+                                <div class="td-task-head">
+                                    <div class="td-task-title">
+                                        <h3>{{task.task_title}}</h3>
+                                    </div>
+                                    <div class="td-task-tools">
+                                        <a href="/important_task/{{task.id}}" class="star"><i
+                                                class="fa-solid fa-star"></i></a>
+                                        <a href="/complete_task/{{task.id}}" class="done"><i
+                                                class="fa-solid fa-square-check"></i></a>
+
+                                        <a href="{{ url_for('home', update_id=task.id) }}" class="pencil"><i class="fa-solid fa-pencil"></i></a>
+                                        
+                                        <a href="/delete_task/{{task.id}}" class="trash"><i
+                                                class="fa-solid fa-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div class="td-task-desc">{{task.task_description}}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!--todays task area ends-->
+
+                    <!--shedule task area-->
+                    <div id="shedule">
+                        <div id="td-head">
+                            <div class="td-head1">
+                                <h1>Important Tasks</h1>
+                            </div>
+                            <div class="td-head2">
+                                <div class="this-week">
+                                    <a href="{{url_for('imptasks')}}">
+                                        <h3>View All</h3><i class="fa-solid fa-chevron-right"
+                                            style="color: #ff4c68;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="imp-tasks">
+                            <div class="imp-tasks-line1">
+                                {% for task in important_tasks %}
+                                <div class="imp-tasks1 {% if task.task_complete %} completed-task {% endif %}">
+                                    <div class="imp-task-head">
+                                        <div class="imp-task-title">
+                                            <h3>{{task.task_title}}</h3>
+                                        </div>
+                                        <div class="imp-task-tools">
+                                            <a href="/important_task/{{task.id}}" class="star"><i
+                                                    class="fa-solid fa-star"></i></a>
+                                            <a href="/complete_task/{{task.id}}" class="done"><i
+                                                    class="fa-solid fa-square-check"></i></a>
+                                            <div class="pencil"><i class="fa-solid fa-pencil"></i></div>
+                                            <a href="/delete_task/{{task.id}}" class="trash"><i
+                                                    class="fa-solid fa-trash"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="imp-task-desc">{{task.task_description}}</div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!--shedule task area ends-->
+                </div>
+            </div>
+            <div id="right-side">
+                <div id="progress">
+                    <div id="progress1">
+                        <div id="progress-hd">
+                            <h1>Progress</h1>
+                        </div>
+                        <div id="progress-no">
+                            <div id="progress-no1">
+                                <h1><span id="taskCompleted">{{ complete_task }}</span><span style="color: gray;">/</span><span
+                                        style="color: #ff4c68;" id="totalTasks">{{ total_tasks }}</span></h1>
+                            </div>
+                            <div id="progress-no2">
+                                <h3>Tasks <br> Completed</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="reminder">
+                    <div id="reminder1">
+                        <div id="td-head">
+                            <div class="td-head1">
+                                <h1>Reminders</h1>
+                            </div>
+                            <div class="td-head2">
+                                <div class="this-week">
+                                    <button id="add-reminder-btn">
+                                        <h3>ADD</h3><i class="fa-solid fa-plus" style="color: #ff4c68;"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="reminder-task-area">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="add-remineder">
+            <div id="taskcont-rem">
+                <div id="main-rem">
+                    <div id="title-rem"><input type="text" name="title1-rem" id="title1-rem"
+                            placeholder="Title Of Reminder"><input type="date" name="date1-rem" id="date1-rem"
+                            placeholder="Date">
+                    </div>
+                    <div id="save-task-btnn-rem"> <button id="save-task-rem">Set As Reminder</button></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const reminderModal = document.getElementById("add-remineder");
+            const reminderContainer = document.getElementById("reminder-task-area");
+
+            // Open reminder modal
+            document.getElementById("add-reminder-btn").addEventListener("click", () => {
+                reminderModal.style.zIndex = 2;
+            });
+
+            // Save a new reminder
+            document.getElementById("save-task-rem").addEventListener("click", () => {
+                const reminderDiv = document.createElement("div");
+                reminderDiv.classList.add("reminder-task1");
+                reminderDiv.innerHTML = `
+                    <div class="reminder-title-area">
+                        <div class="reminder-title">
+                            <h3>Title</h3>
+                        </div>
+                        <div class="reminder-date">9/10/34</div>
+                    </div>
+                    <div class="remineder-priortise">
+                        <i class="fa-solid fa-trash"></i>
+                    </div>`;
+
+                const title = reminderModal.querySelector("#title1-rem").value.trim();
+                const date = reminderModal.querySelector("#date1-rem").value.trim();
+
+                if (!title || !date) {
+                    alert("Please fill in both Title and Date!");
+                    return;
+                }
+
+                reminderDiv.querySelector(".reminder-title h3").textContent = title;
+                reminderDiv.querySelector(".reminder-date").textContent = date;
+
+                // Add functionality to tools
+                // const bookmarkButton = reminderDiv.querySelector(".fa-bookmark");
+                // const editButton = reminderDiv.querySelector(".fa-pencil");
+                const deleteButton = reminderDiv.querySelector(".fa-trash");
+
+                // bookmarkButton.addEventListener("click", () => toggleBookmark(reminderDiv));
+                // editButton.addEventListener("click", () => editReminder(reminderDiv));
+                deleteButton.addEventListener("click", () => deleteReminder(reminderDiv));
+
+                reminderContainer.insertBefore(reminderDiv, reminderContainer.firstChild);
+                reminderModal.style.zIndex = -99;
+
+                saveRemindersToLocalStorage();
+            });
+
+            // Toggle bookmark (priority)
+            function toggleBookmark(reminderDiv) {
+                const bookmarkIcon = reminderDiv.querySelector(".fa-bookmark");
+                reminderDiv.classList.toggle("priority");
+                if (reminderDiv.classList.contains("priority")) {
+                    bookmarkIcon.style.color = "gold";
+                } else {
+                    bookmarkIcon.style.color = "";
+                }
+            }
+
+            // Edit a reminder
+            function editReminder(reminderDiv) {
+                const title = reminderDiv.querySelector(".reminder-title h3").textContent;
+                const date = reminderDiv.querySelector(".reminder-date").textContent;
+
+                reminderModal.querySelector("#title1-rem").value = title;
+                reminderModal.querySelector("#date1-rem").value = date;
+                reminderModal.style.zIndex = 2;
+
+                document.getElementById("save-task-rem").onclick = () => {
+                    const updatedTitle = reminderModal.querySelector("#title1-rem").value.trim();
+                    const updatedDate = reminderModal.querySelector("#date1-rem").value.trim();
+
+                    if (!updatedTitle || !updatedDate) {
+                        alert("Please fill in both Title and Date!");
+                        return;
+                    }
+
+                    reminderDiv.querySelector(".reminder-title h3").textContent = updatedTitle;
+                    reminderDiv.querySelector(".reminder-date").textContent = updatedDate;
+
+                    reminderModal.style.zIndex = -99;
+                    saveRemindersToLocalStorage();
+                    document.getElementById("save-task-rem").onclick = saveNewReminder; // Reset save button behavior
+                };
+            }
+
+            // Delete a reminder
+            function deleteReminder(reminderDiv) {
+                if (confirm("Are you sure you want to delete this reminder?")) {
+                    reminderDiv.remove();
+                    saveRemindersToLocalStorage();
+                }
+            }
+
+            // Save reminders to local storage
+            function saveRemindersToLocalStorage() {
+                const remindersHTML = reminderContainer.innerHTML;
+                localStorage.setItem("reminders", remindersHTML);
+            }
+
+            // Load reminders from local storage on page load
+            document.addEventListener("DOMContentLoaded", function () {
+                const savedReminders = localStorage.getItem("reminders");
+                if (savedReminders) {
+                    reminderContainer.innerHTML = savedReminders;
+
+                    // Reattach event listeners to tools
+                    reminderContainer.querySelectorAll(".reminder-task1").forEach(reminderDiv => {
+                        // const bookmarkButton = reminderDiv.querySelector(".fa-bookmark");
+                        // const editButton = reminderDiv.querySelector(".fa-pencil");
+                        const deleteButton = reminderDiv.querySelector(".fa-trash");
+
+                        // bookmarkButton.addEventListener("click", () => toggleBookmark(reminderDiv));
+                        // editButton.addEventListener("click", () => editReminder(reminderDiv));
+                        deleteButton.addEventListener("click", () => deleteReminder(reminderDiv));
+
+                        const today = new Date()
+                        console.log(today)
+                        const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1)
+                            .toString()
+                            .padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+
+                        console.log(formattedDate);
+                        const reminderTitle = reminderDiv.querySelector('.reminder-title h3').textContent;
+                        const remindDate = reminderDiv.querySelector('.reminder-date').textContent;
+                        console.log("remindDate: ", remindDate);
+                        console.log("formattedDate: ", formattedDate);
+                        if (remindDate === formattedDate) {
+                            alert(`${reminderTitle}`)
+                        }
+                    })
+                };
+            });
+        </script>
+</body>
+
+</html>

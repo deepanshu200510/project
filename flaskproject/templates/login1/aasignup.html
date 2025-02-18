@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Taskiify</title>
+    <style>
+        /* Basic styles */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            background-color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #background-img-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #background-img-container img {
+            width: 100%;
+            /* Changed to cover the entire container */
+            height: 100%;
+            object-fit: cover;
+            clip-path: polygon(0% 0%, 70% 0%, 60% 100%, 0% 100%);
+        }
+
+        main {
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        #big-box {
+            display: flex;
+            width: 90%;
+            max-width: 1100px;
+            height: 90%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            background-color: #1f1f1f;
+        }
+
+        #big-box-background {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+            background-color: #333;
+        }
+
+        #big-box-background img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        #big-box-background-text {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        #big-box-background-text h5 {
+            font-size: 22px;
+            color: #ff4c68;
+        }
+
+        #big-box-background-text h3 {
+            font-size: 34px;
+            margin: 10px 0;
+        }
+
+        #big-box-background-text h4 {
+            font-size: 20px;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        #signup-container {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #222;
+        }
+
+        #signup-container h3 {
+            color: #ffffff;
+            font-size: 42px;
+            font-family: 'Bungee', sans-serif;
+            margin-bottom: 20px;
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        #signup-cred {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #ddd;
+        }
+
+        #signup-cred h4 {
+            color: #aaa;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .signup-credentials {
+            height: 45px;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #555;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f1f1f1;
+            transition: border 0.3s ease;
+        }
+
+        .signup-credentials:focus {
+            border-color: #ff4c68;
+            outline: none;
+        }
+
+        #signup-button,
+        #google-sign-up {
+            width: 100%;
+            height: 45px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 15px 0px;
+            transition: background-color 0.3s ease;
+        }
+
+        #signup-button {
+            background-color: rgb(20, 20, 20);
+        }
+
+        #signup-button:hover {
+            background-color: rgb(0, 0, 0);
+        }
+
+        #google-sign-up {
+            background-color: #4285f4;
+        }
+
+        #google-sign-up:hover {
+            background-color: #357ae8;
+        }
+
+        #loginn {
+            color: #ff4c68;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline;
+        }
+
+        #loginn:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #big-box {
+                flex-direction: column;
+                height: auto;
+            }
+
+            #big-box-background,
+            #signup-container {
+                width: 100%;
+                height: auto;
+            }
+
+            #big-box-background img {
+                clip-path: none;
+                opacity: 0.3;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="background-img-container">
+        <img src="/static/landing/pexels-cottonbro-4069288.jpg" alt="Background Image">
+    </div>
+    <main>
+        <div id="big-box">
+            <div id="big-box-background">
+                <img src="/static/landing/pexels-cottonbro-4069288.jpg" alt="Background">
+                <div id="big-box-background-text">
+                    <h5>Join Taskiify</h5>
+                    <h3>Organize, Plan, and Achieve</h3>
+                    <h4>Sign up to get started with Taskiify</h4>
+                    <p>Effortlessly and efficiently manage your tasks and boost productivity</p>
+                </div>
+            </div>
+            <div id="signup-container">
+                <h3>TASKIIFY</h3>
+                <div id="signup-cred">
+                    <h4>Welcome to Taskiify</h4>
+                    <form method="POST" class="form-register" style="color:white">
+                        {{ form.hidden_tag() }}
+                        <br>
+                        {{ form.username(class="signup-credentials", placeholder="Username") }}
+
+                        {{ form.email(class="signup-credentials", placeholder="Email Address") }}
+
+                        {{ form.password1(class="signup-credentials", placeholder="Password") }}
+
+                        {{ form.password2(class="signup-credentials", placeholder="Confirm Password") }}
+
+                        <br>
+                        {{ form.submit(class="btn btn-lg btn-block btn-primary", id="signup-button") }}
+
+                        <p>Already have an account?
+                            <a href="{{url_for('login_page')}}" id="loginn">Login</a>
+                        </p>
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

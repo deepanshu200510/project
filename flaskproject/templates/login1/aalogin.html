@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Taskiify</title>
+    <style>
+        /* Basic styles */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            background-color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #background-img-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #background-img-container img {
+            width: 70%;
+            height: 100%;
+            object-fit: cover;
+            clip-path: polygon(0% 0%, 70% 0%, 60% 100%, 0% 100%);
+        }
+
+        main {
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        #big-box {
+            display: flex;
+            width: 90%;
+            max-width: 1100px;
+            height: 90%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            background-color: #1f1f1f;
+        }
+
+        #big-box-background {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+            background-color: #333;
+        }
+
+        #big-box-background img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        #big-box-background-text {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        #big-box-background-text h5 {
+            font-size: 22px;
+            color: #ff4c68;
+        }
+
+        #big-box-background-text h3 {
+            font-size: 34px;
+            margin: 10px 0;
+        }
+
+        #big-box-background-text h4 {
+            font-size: 20px;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        #login-container {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #222;
+        }
+
+        #login-container h3 {
+            color: #ffffff;
+            font-size: 42px;
+            font-family: 'Bungee', sans-serif;
+            margin-bottom: 20px;
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        #login-cred {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #ddd;
+        }
+
+        #login-cred h4 {
+            color: #aaa;
+            font-size: 22px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .login-credentials {
+            height: 45px;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #555;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f1f1f1;
+            transition: border 0.3s ease;
+        }
+
+        .login-credentials:focus {
+            border-color: #ff4c68;
+            outline: none;
+        }
+
+        #login-cred a {
+            color: #ff4c68;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        #login-cred a:hover {
+            text-decoration: underline;
+        }
+
+        #google-log-in,
+        #login-button {
+            width: 100%;
+            height: 45px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 15px 0px;
+            transition: background-color 0.3s ease;
+        }
+
+        #google-log-in {
+            background-color: #4285f4;
+        }
+
+        #google-log-in:hover {
+            background-color: #357ae8;
+        }
+
+        #login-button {
+            background-color: rgb(20, 20, 20);
+            color: white;
+        }
+
+        #login-button:hover {
+            background-color: rgb(0, 0, 0);
+            color: white;
+        }
+
+        #signup {
+            color: #ff4c68;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        #signup:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #big-box {
+                flex-direction: column;
+                height: auto;
+            }
+
+            #big-box-background,
+            #login-container {
+                width: 100%;
+                height: auto;
+            }
+
+            #big-box-background img {
+                clip-path: none;
+                opacity: 0.3;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="background-img-container">
+        <img src="/static/landing/pexels-cottonbro-4069288.jpg" alt="Background Image">
+    </div>
+    <main>
+        <div id="big-box">
+            <div id="big-box-background">
+                <img src="/static/landing/pexels-cottonbro-4069288.jpg" alt="Background">
+                <div id="big-box-background-text">
+                    <h5>Unlock Your Potential With</h5>
+                    <h3>Think, Plan and Track</h3>
+                    <h4>All in One Place</h4>
+                    <p>Effortlessly and efficiently manage your tasks and boost productivity</p>
+                </div>
+            </div>
+            <div id="login-container">
+                <h3>TASKIIFY</h3>
+                <div id="login-cred">
+                    <h4>Welcome Back</h4>
+
+                    <form method="Post" class="form-signin" action="{{ url_for('login_page') }}">
+                        {{ form.hidden_tag() }}
+                        <br>
+                        <!-- {{ form.username.label() }} -->
+                        {{ form.username(class="login-credentials", placeholder="Username") }}
+
+                        <!-- {{ form.password.label() }} -->
+                        {{ form.password(class="login-credentials", placeholder="Password") }}
+
+                        <br>
+                        {{ form.submit(class="btn btn-lg btn-block btn-primary", id="login-button")}}
+
+                        <br>
+                        
+                        <!-- <a class="btn btn-sm btn-secondary" href="{{url_for('register_page')}}">Register</a> -->
+                        <p>Don't have an account? <span id="signup"><a href="{{url_for('register_page')}}">Sign Up
+                            Now</a></span></p>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+</body>
+
+</html>
